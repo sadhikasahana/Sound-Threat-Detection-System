@@ -54,9 +54,11 @@ st.markdown(MilitaryThemeCSS.get_custom_css(), unsafe_allow_html=True)
 @st.cache_resource
 def load_model_cached():
     try:
-        model_path = r'S:\sem8\Sound-Threat-Detection-System\model\multilabel_model.keras'
-        norm_stats_path = r'S:\sem8\Sound-Threat-Detection-System\model\generated_multilabel\normalization_stats.csv'
-        thresholds_path = r'S:\sem8\Sound-Threat-Detection-System\model\generated_multilabel\optimal_thresholds.csv'
+        # Use relative paths for cloud deployment compatibility
+        base_dir = Path(__file__).parent
+        model_path = base_dir / 'model' / 'multilabel_model.keras'
+        norm_stats_path = base_dir / 'model' / 'generated_multilabel' / 'normalization_stats.csv'
+        thresholds_path = base_dir / 'model' / 'generated_multilabel' / 'optimal_thresholds.csv'
        
         if not Path(model_path).exists():
             st.error(f"❌ Model not found at: {model_path}")
